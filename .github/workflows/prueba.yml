@@ -11,18 +11,18 @@ on:
       - main
 
 jobs:
-  env:
-      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      SLACK_USERNAME: GithubBot # Optional. (defaults to webhook app)
-      SLACK_CHANNEL: general # Optional. (defaults to webhook)
-      # SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
-    with:
-      args: 'A new commit has been pushed.' # Optional
-
-  steps:
-  - uses: Ilshidur/action-slack@2.0.2
-  - name: Send Slack Notification Push Main
+  slackNotification:
+    runs-on: ubuntu-latest
     env:
-    SLACK_COLOR: '#FFFF00'
-    SLACK_TITLE: 'Push Master'
-    SLACK_MESSAGE: 'Poner la hora, estatus'
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: GithubBot # Optional. (defaults to webhook app)
+        SLACK_CHANNEL: general # Optional. (defaults to webhook)
+
+    steps:
+    - uses: Ilshidur/action-slack@2.0.2
+    - name: Send Slack Notification Push Main
+      with:
+        template: pushMaster
+        title: Push Master
+        description: Se ha realizado un push en master.
+        status: ${{ toJSON(steps) }}
