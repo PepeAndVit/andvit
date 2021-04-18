@@ -12,17 +12,16 @@ on:
 
 jobs:
   slackNotification:
+
     runs-on: ubuntu-latest
-    env:
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Send Slack Notification Push Main
+      uses: rtCamp/action-slack-notify@v2
+      env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: GithubBot # Optional. (defaults to webhook app)
         SLACK_CHANNEL: general # Optional. (defaults to webhook)
-
-    steps:
-    - uses: Ilshidur/action-slack@2.0.2
-    - name: Send Slack Notification Push Main
-      with:
-        template: pushMaster
-        title: Push Master
-        description: Se ha realizado un push en master.
-        status: ${{ toJSON(steps) }}
+        SLACK_MESSAGE: 'Prueba desde \n Github'
+        SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
