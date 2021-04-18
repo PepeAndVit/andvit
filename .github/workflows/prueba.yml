@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Message Push
-      run: curl -H "Content-type: application/json" -X POST -d '{
+      run: curl -H "Content-type: application/json" -X POST -d `{
            "channel": "#general", 
            "attachments" : 
            [
@@ -50,4 +50,4 @@ jobs:
                ]
              }
            ]
-          }' ${{ secrets.SLACK_WEBHOOK }}
+          }` ${{ secrets.SLACK_WEBHOOK }}
