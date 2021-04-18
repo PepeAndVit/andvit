@@ -1,4 +1,4 @@
-name: Github Slack
+name: Message Slack
 
 on:
   # Trigger the workflow on push or pull request,
@@ -17,11 +17,37 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Send Slack Notification Push Main
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_USERNAME: GithubBot # Optional. (defaults to webhook app)
-        SLACK_CHANNEL: general # Optional. (defaults to webhook)
-        SLACK_MESSAGE: 'Prueba desde \n Github'
-        SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
+    - name: Message Push
+      if: ${{ github.event.issue.push }}
+      run: curl -H "Content-type: application/json" -X POST -d '{
+            "channel": "#general",
+            "attachments" : 
+            [
+              {
+                "title": "Amsterdam Apigee Infra \n Prueba al hacer push",
+                "color" : "#F8FF3F",
+                "fields" : [
+                  {
+                    "title" : "Description",
+                    "value" : "Iria la descripción del action",
+                    "short" : "true"
+                  },
+                  {
+                    "title" : "Priority/Ticket",
+                    "value" : "Prueba del ticket",
+                    "short" : "true"
+                  },
+                  {
+                    "title" : "Cause",
+                    "value" : "El porque hago el action",
+                    "short" : "true"
+                  },
+                  {
+                    "title" : "Solution",
+                    "value" : "razón del despliegue",
+                    "short" : "true"
+                  }
+                ]
+              }
+            ]
+          }' ${{ secrets.SLACK_WEBHOOK }}
