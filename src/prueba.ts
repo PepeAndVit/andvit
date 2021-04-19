@@ -1,0 +1,1 @@
+const inicio:string = "hola";
