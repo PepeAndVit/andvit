@@ -23,6 +23,6 @@ jobs:
         run: |
           curl -H "Content-type: application/json" -X POST -d '{"channel": "#general", "title": "Pull Request", "text": "Esto es una pull request"}' ${{ secrets.SLACK_WEBHOOK }}
       - name: Message Push
-        if: ${{ !github.event.issue.pull_request }}
+        if: ${{ github.event.issue.push }}
         run: |
-          curl -H "Content-type: application/json" -X POST -d '{"channel": "#general", "title": "Esto es un push", "text": "prueba desde \n github"}' ${{ secrets.SLACK_WEBHOOK }}
+          curl -H "Content-type: application/json" -X POST -d `{"channel": "#general","attachments" :[{"title": "Amsterdam Apigee Infra \n Prueba al hacer push","color" : "#F8FF3F","fields":[{"title" : "Description","value" : "Iria la descripción del action","short" : "true"},{"title" : "Priority/Ticket","value" : "Prueba del ticket","short" : "true"},{"title" : "Cause","value" : "El porque hago el action","short" : "true"},{"title" : "Solution","value" : "razón del despliegue", "short" : "true"}]}]}' ${{ secrets.SLACK_WEBHOOK }}
