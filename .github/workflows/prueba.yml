@@ -20,8 +20,8 @@ jobs:
         run: |
         curl -H "Content-type: application/json" -X POST -d << EOF
         {
-          "channel": "#general", 
-          "text": "prueba desde \n github"
+          "text": "prueba desde \n github",
+          "channel": "#general"
         } 
         EOF
         ${{ secrets.SLACK_WEBHOOK }}
