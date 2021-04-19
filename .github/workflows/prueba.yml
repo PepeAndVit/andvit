@@ -23,4 +23,4 @@ jobs:
       - name: Message Push
         if: ${{ !github.event.issue.pull_request }}
         run: |
-          curl -H "Content-type: application/json" -X POST -d '{"channel": "#inicio","attachments" :[{"title": "Amsterdam Apigee Infra \n\n","color" : "#F8FF3F","fields":[{"title" : "Description","value" : "Iria la descripción del action","short" : "true"},{"title" : "Priority/Ticket","value" : "Prueba del ticket","short" : "true"},{"title" : "Cause","value" : "El porque hago el action","short" : "true"},{"title" : "Solution","value" : "razón del despliegue", "short" : "true"}]}]}' ${{ secrets.SLACK_WEBHOOK }}
+          curl -H "Content-type: application/json" -X POST -d '{"channel": "#inicio","attachments" :[{"title": "Amsterdam Apigee Infra \n\n","color" : "#F8FF3F","fields":[{"title" : "Description","value" : "Iria la descripción del action","short" : "true"},{"title" : "Priority/Ticket","value" : "Prueba del ticket","short" : "true"},{"title" : "Cause","value" : "${{ github.repository }}","short" : "true"},{"title" : "Solution","value" : "${{ steps.get_release.outputs.upload_url }}", "short" : "true"}]}]}' ${{ secrets.SLACK_WEBHOOK }}
