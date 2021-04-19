@@ -12,15 +12,13 @@ on:
 
 jobs:
   slackNotification:
-
     runs-on: ubuntu-latest
-
     steps:
-    - name: Check out repository code
-      uses: actions/checkout@v2
-    - name: Message Push
-      run: |
-      curl -H "Content-type: application/json" -X POST -d '{
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Message Push
+        run: |
+        curl -H "Content-type: application/json" -X POST -d '{
           "channel": "#general", 
           "text": "prueba desde \n github"
-      }' ${{ secrets.SLACK_WEBHOOK }}
+        }' ${{ secrets.SLACK_WEBHOOK }}
