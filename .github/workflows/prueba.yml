@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Mostrar evento
+        run: echo github.event_name
       - name: Message Pull Request
         if: github.event == 'pull_request'
         run: |
