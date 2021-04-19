@@ -18,10 +18,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Message Push
         run: |
-        curl -H "Content-type: application/json" -X POST -d << EOF
-        {
+        curl -H "Content-type: application/json" -X POST -d '{
           "text": "prueba desde \n github",
           "channel": "#general"
-        } 
-        EOF
-        ${{ secrets.SLACK_WEBHOOK }}
+        }' ${{ secrets.SLACK_WEBHOOK }}
