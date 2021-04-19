@@ -20,6 +20,6 @@ jobs:
     - name: Message Push
       run: |
       curl -H "Content-type: application/json" -X POST -d '{
-        "channel": "#general", 
-        "text": "prueba desde \n github"
+        channel: "#general", 
+        text: "prueba desde \n github"
       }' ${{ secrets.SLACK_WEBHOOK }}
